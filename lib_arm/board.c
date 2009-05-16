@@ -136,6 +136,10 @@ void inline __yellow_LED_on(void) {}
 void inline yellow_LED_on(void)__attribute__((weak, alias("__yellow_LED_on")));
 void inline __yellow_LED_off(void) {}
 void inline yellow_LED_off(void)__attribute__((weak, alias("__yellow_LED_off")));
+void inline __blue_LED_on(void) {}
+void inline blue_LED_on(void)__attribute__((weak, alias("__blue_LED_on")));
+void inline __blue_LED_off(void) {}
+void inline blue_LED_off(void)__attribute__((weak, alias("__blue_LED_off")));
 
 /************************************************************************
  * Init Utilities							*
@@ -266,7 +270,10 @@ init_fnc_t *init_sequence[] = {
 	arch_cpu_init,		/* basic arch cpu dependent setup */
 #endif
 	board_init,		/* basic board dependent setup */
+#if defined(CONFIG_USE_IRQ)
 	interrupt_init,		/* set up exceptions */
+#endif
+	timer_init,		/* initialize timer */
 	env_init,		/* initialize environment */
 	init_baudrate,		/* initialze baudrate settings */
 	serial_init,		/* serial communications setup */

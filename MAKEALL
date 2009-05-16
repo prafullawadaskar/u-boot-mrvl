@@ -528,6 +528,7 @@ LIST_ARM9="			\
 	davinci_schmoogie	\
 	davinci_sffsdr		\
 	davinci_sonata		\
+	davinci_dm355evm	\
 "
 
 #########################################################################
@@ -562,6 +563,7 @@ LIST_ARM_CORTEX_A8="		\
 	omap3_evm		\
 	omap3_pandora		\
 	omap3_zoom1		\
+	omap3_zoom2		\
 "
 
 #########################################################################

@@ -2801,6 +2801,9 @@ davinci_sffsdr_config :	unconfig
 davinci_sonata_config :	unconfig
 	@$(MKCONFIG) $(@:_config=) arm arm926ejs sonata davinci davinci
 
+davinci_dm355evm_config :	unconfig
+	@$(MKCONFIG) $(@:_config=) arm arm926ejs dm355evm davinci davinci
+
 lpd7a400_config \
 lpd7a404_config:	unconfig
 	@$(MKCONFIG) $(@:_config=) arm lh7a40x lpd7a40x
@@ -2993,6 +2996,9 @@ omap3_pandora_config :	unconfig
 
 omap3_zoom1_config :	unconfig
 	@$(MKCONFIG) $(@:_config=) arm arm_cortexa8 zoom1 omap3 omap3
+
+omap3_zoom2_config :	unconfig
+	@$(MKCONFIG) $(@:_config=) arm arm_cortexa8 zoom2 omap3 omap3
 
 #########################################################################
 ## XScale Systems
