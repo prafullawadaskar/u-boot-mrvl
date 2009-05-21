@@ -2879,6 +2879,9 @@ sbc2410x_config: unconfig
 scb9328_config	:	unconfig
 	@$(MKCONFIG) $(@:_config=) arm arm920t scb9328 NULL imx
 
+sheevaplug_config: unconfig
+	@$(MKCONFIG) $(@:_config=) arm arm926ejs $(@:_config=) Marvell kirkwood
+
 smdk2400_config	:	unconfig
 	@$(MKCONFIG) $(@:_config=) arm arm920t smdk2400 samsung s3c24x0
 
@@ -3106,7 +3109,6 @@ omap2420h4_config	: unconfig
 
 qong_config		: unconfig
 	@$(MKCONFIG) $(@:_config=) arm arm1136 qong davedenx mx31
-
 
 #########################################################################
 ## ARM1176 Systems
