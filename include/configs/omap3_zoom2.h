@@ -43,6 +43,12 @@
 #include <asm/arch/cpu.h>	/* get chip and board defs */
 #include <asm/arch/omap3.h>
 
+/*
+ * Display CPU and Board information
+ */
+#define CONFIG_DISPLAY_CPUINFO		1
+#define CONFIG_DISPLAY_BOARDINFO	1
+
 /* Clock Defines */
 #define V_OSCK			26000000	/* Clock output from T2 */
 #define V_SCLK			(V_OSCK >> 1)
@@ -69,29 +75,53 @@
 
 /*
  * NS16550 Configuration
+ * Zoom2 uses the TL16CP754C on the debug board
  */
-#define V_NS16550_CLK			48000000	/* 48MHz (APLL96/2) */
+#define CONFIG_SERIAL_MULTI		1
+/*
+ * 0 - 1 : first  USB with respect to the left edge of the debug board
+ * 2 - 3 : second USB with respect to the left edge of the debug board
+ */
+#define ZOOM2_DEFAULT_SERIAL_DEVICE	(&zoom2_serial_device0)
+
+#define V_NS16550_CLK			(1843200)	/* 1.8432 Mhz */
 
 #define CONFIG_SYS_NS16550
-#define CONFIG_SYS_NS16550_SERIAL
-#define CONFIG_SYS_NS16550_REG_SIZE	(-4)
+#define CONFIG_SYS_NS16550_REG_SIZE	(-2)
 #define CONFIG_SYS_NS16550_CLK		V_NS16550_CLK
-
-/*
- * select serial console configuration
- */
-#define CONFIG_CONS_INDEX		3
-#define CONFIG_SYS_NS16550_COM3		OMAP34XX_UART3
-#define CONFIG_SERIAL3			3	/* UART3 */
+#define CONFIG_BAUDRATE			115200
+#define CONFIG_SYS_BAUDRATE_TABLE	{115200}
 
 /* allow to overwrite serial and ethaddr */
 #define CONFIG_ENV_OVERWRITE
-#define CONFIG_BAUDRATE			115200
-#define CONFIG_SYS_BAUDRATE_TABLE	{4800, 9600, 19200, 38400, 57600,\
-					115200}
+
 #define CONFIG_MMC			1
 #define CONFIG_OMAP3_MMC		1
 #define CONFIG_DOS_PARTITION		1
+
+/* Status LED */
+#define CONFIG_STATUS_LED		1 /* Status LED enabled	*/
+#define CONFIG_BOARD_SPECIFIC_LED	1
+#define STATUS_LED_BLUE			0
+#define STATUS_LED_RED			1
+/* Blue */
+#define STATUS_LED_BIT			STATUS_LED_BLUE
+#define STATUS_LED_STATE		STATUS_LED_ON
+#define STATUS_LED_PERIOD		(CONFIG_SYS_HZ / 2)
+/* Red */
+#define STATUS_LED_BIT1			STATUS_LED_RED
+#define STATUS_LED_STATE1		STATUS_LED_OFF
+#define STATUS_LED_PERIOD1		(CONFIG_SYS_HZ / 2)
+/* Optional value */
+#define STATUS_LED_BOOT			STATUS_LED_BIT
+
+/* GPIO banks */
+#ifdef CONFIG_STATUS_LED
+#define CONFIG_OMAP3_GPIO_2 /* ZOOM2_LED_BLUE2 */
+#define CONFIG_OMAP3_GPIO_6 /* ZOOM2_LED_RED */
+#endif
+#define CONFIG_OMAP3_GPIO_3 /* board revision */
+#define CONFIG_OMAP3_GPIO_5 /* debug board detection, ZOOM2_LED_BLUE */
 
 /* commands to include */
 #include <config_cmd_default.h>

@@ -265,7 +265,6 @@ typedef int (init_fnc_t) (void);
 int print_cpuinfo (void);
 
 init_fnc_t *init_sequence[] = {
-	cpu_init,		/* basic cpu dependent setup */
 #if defined(CONFIG_ARCH_CPU_INIT)
 	arch_cpu_init,		/* basic arch cpu dependent setup */
 #endif
@@ -400,6 +399,10 @@ void start_armboot (void)
 
 	console_init_r ();	/* fully init console as a device */
 
+#if defined(CONFIG_ARCH_MISC_INIT)
+	/* miscellaneous arch dependent initialisations */
+	arch_misc_init ();
+#endif
 #if defined(CONFIG_MISC_INIT_R)
 	/* miscellaneous platform dependent initialisations */
 	misc_init_r ();
