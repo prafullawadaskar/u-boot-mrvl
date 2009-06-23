@@ -155,5 +155,6 @@ int kw_config_mpp(unsigned int mpp0_7, unsigned int mpp8_15,
 		unsigned int mpp16_23, unsigned int mpp24_31,
 		unsigned int mpp32_39, unsigned int mpp40_47,
 		unsigned int mpp48_55);
+void orion_usb_phy_v1_setup(void);
 #endif /* __ASSEMBLY__ */
 #endif /* _KWCPU_H */

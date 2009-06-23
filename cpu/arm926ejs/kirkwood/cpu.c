@@ -260,6 +260,15 @@ int arch_cpu_init(void)
 	reg &= ~(1 << 4);	/* Clear PortReset Bit */
 	writel(reg, (KWGBE_PORT_SERIAL_CONTROL1_REG(1)));
 #endif
+#ifdef CONFIG_KIRKWOOD_USBPHY_INIT
+	/*
+	 * On kirkwood by default USB PHY is disabled
+	 * and from Linux-2.6.29 onward, ehci kernel driver has changed
+	 * expecting such platform specific init should be done by boot
+	 * loader
+	 */
+	orion_usb_phy_v1_setup();
+#endif /* CONFIG_KIRKWOOD_USBPHY_INIT */
 #ifdef CONFIG_KIRKWOOD_PCIE_INIT
 	/*
 	 * Enable PCI Express Port0
